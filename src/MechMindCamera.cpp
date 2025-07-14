@@ -8,6 +8,9 @@
 #include <pcl/point_types.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <MechMindCamera.h>
+// zmiany
+#include "halconcpp/HalconCpp.h"
+#include "HalconUtil.h"
 
 namespace {
 
@@ -529,6 +532,13 @@ void MechMindCamera::capture_point_cloud_callback(
         frame.saveUntexturedPointCloud(mmind::eye::FileFormat::PLY, "/tmp/point_cloud.ply");
         std::cout << "The point cloud is saved to /tmp." << std::endl;
     }
+
+    const auto halconPointCloudXYZ = mecheyeToHalconPointCloud(pointCloud);
+
+    // Save the untextured point cloud.
+    const auto pointCloudFileXYZ = "/home/ws/HalconExchange/UntexturedPointCloud.ply";
+    std::cout << "Save the point cloud to file: " << pointCloudFileXYZ << std::endl;
+    savePointCloud(halconPointCloudXYZ, pointCloudFileXYZ);
 }
 
 void MechMindCamera::capture_textured_point_cloud_callback(
@@ -548,6 +558,15 @@ void MechMindCamera::capture_textured_point_cloud_callback(
                                             "/tmp/textured_point_cloud.ply");
         std::cout << "The textured point cloud is saved to /tmp." << std::endl;
     }
+
+    // tutaj
+    const auto halconPointCloudXYZRGB = mecheyeToHalconPointCloud(texturedPointCloud);
+
+    // Save the textured point cloud.
+    const auto pointCloudFileXYZRGB = "/home/ws/HalconExchange/HalconTexturedPointCloud.ply";
+    std::cout << "Save the textured point cloud to file: " << pointCloudFileXYZRGB << std::endl;
+    savePointCloud(halconPointCloudXYZRGB, pointCloudFileXYZRGB);
+
 }
 
 void MechMindCamera::device_info_callback(

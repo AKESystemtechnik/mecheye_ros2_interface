@@ -3,6 +3,7 @@ project (mecheye_ros_interface)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARDREQUIRED ON)
 set(CMAKE_VERBOSE_MAKEFILE on)
+set(HALCONROOT "/opt/MVTec/HALCON-24.11-Progress-Steady")
 
 find_package(PCL REQUIRED)
 find_package(OpenCV REQUIRED)
@@ -64,10 +65,14 @@ include_directories(
     ${EIGEN_INCLUDE_DIRS}
     ${BOOST_INCLUDE_DIRS}
     /opt/mech-mind/mech-eye-sdk/include
+    ${HALCONROOT}/include
 )
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
-link_directories(/opt/mech-mind/mech-eye-sdk/lib)
+link_directories(
+    /opt/mech-mind/mech-eye-sdk/lib
+    ${HALCONROOT}/lib/x64-linux
+    )
 
 aux_source_directory(src SRC_LIST)
 add_executable(start ${SRC_LIST})
@@ -90,6 +95,9 @@ target_link_libraries(start
     ${EIGEN_LIBRARIES}
     ${BOOST_LIBRARIES}
     MechEyeApi
+    halcon
+    halconcpp
+    hdevenginecpp
 )
 
 rosidl_target_interfaces(start ${PROJECT_NAME} "rosidl_typesupport_cpp")
