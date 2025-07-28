@@ -29,9 +29,9 @@ HalconCpp::HObjectModel3D mecheyeToHalconPointCloud(const mmind::eye::PointCloud
     // std::cout << sizeof(tuplePointsX.DArr()) << std::endl;
     for (size_t i = 0; i < height; ++i) {
         for (size_t j = 0; j < width; ++j) {
-            tuplePointsX.DArr()[validPointIndex] = 0.001 * pointCloud[validPointIndex].x; // mm to m
-            tuplePointsY.DArr()[validPointIndex] = 0.001 * pointCloud[validPointIndex].y; // mm to m
-            tuplePointsZ.DArr()[validPointIndex] = 0.001 * pointCloud[validPointIndex].z; // mm to m
+            tuplePointsX.DArr()[validPointIndex] = pointCloud[validPointIndex].x;
+            tuplePointsY.DArr()[validPointIndex] = pointCloud[validPointIndex].y;
+            tuplePointsZ.DArr()[validPointIndex] = pointCloud[validPointIndex].z;
             tupleXYZMapping.LArr()[2 + validPointIndex] = i;
             tupleXYZMapping.LArr()[2 + numberOfValidPoints + validPointIndex] = j;
             validPointIndex++;
@@ -75,9 +75,9 @@ HalconCpp::HObjectModel3D mecheyeToHalconPointCloud(
 
     for (size_t i = 0; i < height; ++i) {
         for (size_t j = 0; j < width; ++j) {
-            tuplePointsX.DArr()[validPointIndex] = 0.001 * pointCloud[validPointIndex].x; // mm to m
-            tuplePointsY.DArr()[validPointIndex] = 0.001 * pointCloud[validPointIndex].y; // mm to m
-            tuplePointsZ.DArr()[validPointIndex] = 0.001 * pointCloud[validPointIndex].z; // mm to m
+            tuplePointsX.DArr()[validPointIndex] = pointCloud[validPointIndex].x;
+            tuplePointsY.DArr()[validPointIndex] = pointCloud[validPointIndex].y;
+            tuplePointsZ.DArr()[validPointIndex] = pointCloud[validPointIndex].z;
             tupleColorsR.LArr()[validPointIndex] = pointCloud[validPointIndex].r;
             tupleColorsG.LArr()[validPointIndex] = pointCloud[validPointIndex].g;
             tupleColorsB.LArr()[validPointIndex] = pointCloud[validPointIndex].b;
